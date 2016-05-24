@@ -1,0 +1,22 @@
+reset
+st = 0
+to = 1000
+offset = 4
+se xl "x"
+se yl "f"
+unse key
+se grid
+se yr [0:0.5]
+se term pngcairo enhanced size 640,480 font "Arial,12"
+do for[i = st : to : offset]{
+    pngname = sprintf('./res/output%04d.png', i / offset)
+    se output pngname
+    
+    input = sprintf('./res/output%d.txt', i)
+    gt = sprintf("t = %.2f", i * 0.01)
+    se title gt
+    plot input w l
+}
+se term wxt
+se output
+reset
