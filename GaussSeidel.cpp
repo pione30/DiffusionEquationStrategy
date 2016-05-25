@@ -24,5 +24,5 @@ void GaussSeidel_st(const vd& A, vd &b){
     cblas_dcopy(N, x.data(), 1, prevx.data(), 1);
   }
   
-  cblas_dcopy(N, x.data(), 1, b.data(), 1);
+  b = move(x);
 }
