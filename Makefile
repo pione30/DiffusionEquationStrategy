@@ -4,7 +4,9 @@ PROGRAM = a.out
 SRCS = \
 			main.cpp \
 			GaussSeidel.cpp \
-			DiffusionEq_CrankNicolson.cpp
+			DiffusionEq.cpp \
+			CrankNicolson_GaussSeidel.cpp \
+			CrankNicolson_LAPACK.cpp
 
 # 定義済みマクロの再定義
 CXX = g++
