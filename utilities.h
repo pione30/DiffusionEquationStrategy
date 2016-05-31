@@ -3,6 +3,9 @@
 extern "C" {
   #include <cblas.h>
   #include <lapacke.h>
+  #include <gsl/gsl_errno.h>
+  #include <gsl/gsl_odeiv2.h>
+  #include <fftw3.h>
 }
 #define FOR(i, a, b) for(int (i) = (a); (i) <= (b); ++(i))
 #define rep(i, n) FOR(i, 0, n - 1)

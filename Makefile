@@ -11,7 +11,7 @@ SRCS = \
 # 定義済みマクロの再定義
 CXX = g++
 CXXFLAGS = -std=c++14 -O2 -Wall
-LIBS = -lgfortran -lblas -llapack -llapacke -lgsl -lgslcblas -fopenmp
+LIBS = -lgfortran -lblas -llapack -llapacke -lgsl -lgslcblas -lfftw3 -fopenmp
 
 # オブジェクトファイルは.cppを.oに置換したもの
 OBJS = $(SRCS:.cpp=.o)
