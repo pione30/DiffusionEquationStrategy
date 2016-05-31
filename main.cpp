@@ -1,4 +1,5 @@
-#include "DiffusionEq_CrankNicolson.h"
+#include "DiffusionEq.h"
+#include "CrankNicolson_LAPACK.h"
 using namespace chrono;
 
 int main(){
@@ -8,15 +9,14 @@ int main(){
   int _NT = 1000;
   double _TEND = 10;
   
-  auto de_cn = make_unique<DiffusionEq_CrankNicolson>(_D, _NX, _L, _NT, _TEND);
+  auto de_cn = make_unique<CrankNicolson_LAPACK>(_D, _NX, _L, _NT, _TEND);
   
   auto start = system_clock::now();
   rep(t, _NT + 1){
     cout << "t = " << t << endl;
     de_cn->output(t);
     if(t == _NT) break;
-    de_cn->timeStepEvolution_GaussSeidel();
-    // de_cn->timeStepEvolution_LAPACK();
+    de_cn->timeStepEvolution();
   }
   auto end = system_clock::now();
 
