@@ -2,7 +2,7 @@
 #include "DiffusionEq.h"
 #include "GaussSeidel.h"
 
-class CrankNicolson_GaussSeidel : DiffusionEq {
+class CrankNicolson_GaussSeidel : public DiffusionEq {
 public:
   CrankNicolson_GaussSeidel(double _D, int _NX, double _L, int _NT, double _TEND);
   void timeStepEvolution() override;

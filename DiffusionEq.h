@@ -3,12 +3,13 @@
 
 class DiffusionEq{
 public:
-  DiffusionEq(double _D, int _NX, double _L, int _NT, double _TEND);
   virtual void timeStepEvolution() = 0;
   void output(int ti) const;
   
 protected:
   
+  DiffusionEq(double _D, int _NX, double _L, int _NT, double _TEND);
+
   const double D; // diffusion coefficient
   const int NX;
   const double L;

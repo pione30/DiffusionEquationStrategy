@@ -2,6 +2,16 @@
 
 // public:
 
+void DiffusionEq::output(int ti) const {
+  ostringstream os;
+  os << "res/output" << ti << ".txt";
+  ofstream ofs(os.str());
+  ofs << "### x \t psi(x)" << endl;
+  rep(i, NX) ofs << i2x(i) << "\t" << psi[i] << endl;
+}
+
+// protected:
+
 DiffusionEq::DiffusionEq(double _D, int _NX, double _L, int _NT, double _TEND) :
   D(_D),
   NX(_NX), 
@@ -14,16 +24,6 @@ DiffusionEq::DiffusionEq(double _D, int _NX, double _L, int _NT, double _TEND) :
   psi.resize(NX);
   initPsi(psi);
 }
-
-void DiffusionEq::output(int ti) const {
-  ostringstream os;
-  os << "res/output" << ti << ".txt";
-  ofstream ofs(os.str());
-  ofs << "### x \t psi(x)" << endl;
-  rep(i, NX) ofs << i2x(i) << "\t" << psi[i] << endl;
-}
-
-// protected:
 
 double DiffusionEq::i2x(int i) const{
   return -L / 2 + (i + 1) * DX;
