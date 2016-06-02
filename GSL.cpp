@@ -7,7 +7,7 @@ GSL::GSL(double _D, int _NX, double _L, int _NT, double _TEND) :
 {
   current_time = 0;
   DiffEqK.resize(2 * NX);
-  makeDiffEqK();
+  makeDiffEqK(DiffEqK);
   sys = { GSLfunc::func, nullptr, (size_t)NX, &DiffEqK };
   d = gsl_odeiv2_driver_alloc_y_new(&sys, gsl_odeiv2_step_rk8pd, 1e-6, 1e-6, 0.0);
 }
@@ -26,7 +26,7 @@ void GSL::timeStepEvolution(){
 
 // private:
 
-void GSL::makeDiffEqK(){
+void GSL::makeDiffEqK(vd& DiffEqK){
   auto index = [&](int i, int j) { return i + 2 * j; };
 
   rep(j, NX) rep(i, 2){
