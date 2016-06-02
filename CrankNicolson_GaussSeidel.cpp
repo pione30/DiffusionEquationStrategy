@@ -14,7 +14,7 @@ CrankNicolson_GaussSeidel::CrankNicolson_GaussSeidel(double _D, int _NX, double 
 
 void CrankNicolson_GaussSeidel::timeStepEvolution(){
   cblas_dsbmv(CblasColMajor, CblasUpper, NX, 1, 1.0, B.data(), 2, psi.data(), 1, 0, Bpsi.data(), 1);
-  GaussSeidel_st(A, Bpsi);
+  handmade::GaussSeidel_st(A, Bpsi);
   swap(psi, Bpsi);
 }
 
