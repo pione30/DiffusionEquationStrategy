@@ -11,7 +11,7 @@ private:
   
   double current_time;
   vd DiffEqK;
-  void makeDiffEqK();
+  void makeDiffEqK(vd& DiffEqK);
 
   gsl_odeiv2_system sys;
   gsl_odeiv2_driver* d;
