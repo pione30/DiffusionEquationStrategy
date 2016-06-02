@@ -3,6 +3,7 @@
 
 class DiffusionEq{
 public:
+  virtual ~DiffusionEq(){};
   virtual void timeStepEvolution() = 0;
   void output(int ti) const;
   

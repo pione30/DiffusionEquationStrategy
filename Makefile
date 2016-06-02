@@ -5,6 +5,7 @@ SRCS = \
 			main.cpp \
 			GaussSeidel.cpp \
 			DiffusionEq.cpp \
+			GSL.cpp \
 			CrankNicolson_GaussSeidel.cpp \
 			CrankNicolson_LAPACK.cpp
 
