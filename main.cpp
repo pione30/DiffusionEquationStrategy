@@ -1,6 +1,7 @@
 #include "DiffusionEq.h"
 #include "CrankNicolson_LAPACK.h"
 #include "GSL.h"
+#include "FFTW.h"
 using namespace chrono;
 
 int main(){
@@ -10,7 +11,7 @@ int main(){
   int _NT = 1000;
   double _TEND = 10;
   
-  auto de = make_unique<GSL>(_D, _NX, _L, _NT, _TEND);
+  auto de = make_unique<FFTW>(_D, _NX, _L, _NT, _TEND);
   
   auto start = system_clock::now();
   rep(t, _NT + 1){
