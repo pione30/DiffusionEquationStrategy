@@ -1,6 +1,7 @@
 #include "DiffusionEq.h"
-#include "CrankNicolson_LAPACK.h"
 #include "GSL.h"
+#include "CrankNicolson_GaussSeidel.h"
+#include "CrankNicolson_LAPACK.h"
 #include "FFTW.h"
 using namespace chrono;
 
@@ -11,12 +12,12 @@ int main(){
   int _NT = 1000;
   double _TEND = 10;
   
-  auto de = make_unique<FFTW>(_D, _NX, _L, _NT, _TEND);
+  auto de = make_unique<CrankNicolson_LAPACK>(_D, _NX, _L, _NT, _TEND);
   
   auto start = system_clock::now();
   rep(t, _NT + 1){
-    cout << "t = " << t << endl;
-    de->output(t);
+    // cout << "t = " << t << endl;
+    // de->output(t);
     if(t == _NT) break;
     de->timeStepEvolution();
   }
