@@ -7,7 +7,8 @@ SRCS = \
 			DiffusionEq.cpp \
 			GSL.cpp \
 			CrankNicolson_GaussSeidel.cpp \
-			CrankNicolson_LAPACK.cpp
+			CrankNicolson_LAPACK.cpp \
+			FFTW.cpp
 
 # 定義済みマクロの再定義
 CXX = g++

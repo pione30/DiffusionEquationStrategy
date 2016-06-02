@@ -15,7 +15,10 @@ extern "C" {
 #define all(a) (a).begin(),(a).end()
 #define PB push_back
 using namespace std;
+using Complex = complex<double>;
 using vi = vector<int>;
 using vd = vector<double>;
+using vC = vector<Complex>;
 using vvi = vector<vi>;
 using vvd = vector<vd>;
+using vvC = vector<vC>;
