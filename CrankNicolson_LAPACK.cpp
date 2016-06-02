@@ -21,7 +21,7 @@ void CrankNicolson_LAPACK::timeStepEvolution(){
     exit(1);
   }
 
-  cblas_dcopy(NX, Bpsi.data(), 1, psi.data(), 1);
+  swap(psi, Bpsi);
 }
 
 // private:
