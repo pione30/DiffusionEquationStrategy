@@ -1,5 +1,6 @@
 #include "DiffusionEq.h"
 #include "CrankNicolson_LAPACK.h"
+#include "GSL.h"
 using namespace chrono;
 
 int main(){
@@ -9,14 +10,14 @@ int main(){
   int _NT = 1000;
   double _TEND = 10;
   
-  auto de_cn = make_unique<CrankNicolson_LAPACK>(_D, _NX, _L, _NT, _TEND);
+  auto de = make_unique<GSL>(_D, _NX, _L, _NT, _TEND);
   
   auto start = system_clock::now();
   rep(t, _NT + 1){
     cout << "t = " << t << endl;
-    de_cn->output(t);
+    de->output(t);
     if(t == _NT) break;
-    de_cn->timeStepEvolution();
+    de->timeStepEvolution();
   }
   auto end = system_clock::now();
 
