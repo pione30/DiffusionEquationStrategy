@@ -5,25 +5,47 @@
 #include "FFTW.h"
 using namespace chrono;
 
-int main(){
-  double _D = 1;
-  int _NX = 1000;
-  double _L = 50;
-  int _NT = 1000;
-  double _TEND = 10;
-  
-  auto de = make_unique<CrankNicolson_GaussSeidel>(_D, _NX, _L, _NT, _TEND);
-  
-  auto start = system_clock::now();
-  rep(t, _NT + 1){
-    // cout << "t = " << t << endl;
-    // de->output(t);
-    if(t == _NT) break;
-    de->timeStepEvolution();
+namespace context {
+  constexpr double D = 1;      // diffusion coefficient
+  constexpr int NXINI = 10;    // initial division number of the system
+  constexpr int NXMAX = 100;  // maximum division number of the system
+  constexpr int NXINC = 10;    // increment for the division number of the system
+  constexpr double L = 50;     // system size
+  constexpr int NT = 10000;    // divison number of time
+  constexpr double TEND = 10;  // the end of time
+
+  template<class T>
+  void solveDiffusionEq(){
+    // diffusion equation strategy
+    unique_ptr<T> des;
+    string strategy_name = typeid(des.get()).name();
+
+    ostringstream os;
+    os << "res/exectime_" << strategy_name << ".txt";
+    ofstream ofs(os.str());
+    ofs << "### NX \t time[ms]" << endl;
+    
+    for(int NX = NXINI; NX <= NXMAX; NX += NXINC){
+      cout << strategy_name << " NX = " << NX << endl;
+
+      des = make_unique<T>(D, NX, L, NT, TEND);
+
+      auto start = system_clock::now();
+      rep(t, NT + 1){
+        // cout << "t = " << t << endl;
+        // des->output(t);
+        if(t == NT) break;
+        des->timeStepEvolution();
+      }
+      auto end = system_clock::now();
+
+      ofs << NX << "\t" << duration_cast<milliseconds>(end - start).count() << endl;
+    }
   }
-  auto end = system_clock::now();
+}
 
-  cout << duration_cast<milliseconds>(end - start).count() / 1.0e3 << "[s]" << endl;
-
+int main(){
+  // context::solveDiffusionEq<GSL>();
+  context::solveDiffusionEq<CrankNicolson_LAPACK>();
   return 0;
 }
