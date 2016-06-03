@@ -8,7 +8,7 @@ using namespace chrono;
 namespace context {
   constexpr double D = 1;      // diffusion coefficient
   constexpr int NXINI = 10;    // initial division number of the system
-  constexpr int NXMAX = 1000;  // maximum division number of the system
+  constexpr int NXMAX = 100;  // maximum division number of the system
   constexpr int NXINC = 10;    // increment for the division number of the system
   constexpr double L = 50;     // system size
   constexpr int NT = 10000;    // divison number of time
@@ -16,16 +16,19 @@ namespace context {
 
   template<class T>
   void solveDiffusionEq(){
+    // diffusion equation strategy
+    unique_ptr<T> des;
+    string strategy_name = typeid(des.get()).name();
+
     ostringstream os;
-    os << "res/exectime_.txt";
+    os << "res/exectime_" << strategy_name << ".txt";
     ofstream ofs(os.str());
     ofs << "### NX \t time[ms]" << endl;
     
     for(int NX = NXINI; NX <= NXMAX; NX += NXINC){
-      cout << "NX = " << NX << endl;
+      cout << strategy_name << " NX = " << NX << endl;
 
-      // diffusion equation strategy
-      auto des = make_unique<T>(D, NX, L, NT, TEND);
+      des = make_unique<T>(D, NX, L, NT, TEND);
 
       auto start = system_clock::now();
       rep(t, NT + 1){
@@ -41,8 +44,8 @@ namespace context {
   }
 }
 
-
 int main(){
+  // context::solveDiffusionEq<GSL>();
   context::solveDiffusionEq<CrankNicolson_LAPACK>();
   return 0;
 }
