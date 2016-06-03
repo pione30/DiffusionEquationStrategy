@@ -6,13 +6,12 @@
 using namespace chrono;
 
 namespace context {
-  constexpr double D = 1;      // diffusion coefficient
-  constexpr int NXINI = 10;    // initial division number of the system
-  constexpr int NXMAX = 100;  // maximum division number of the system
-  constexpr int NXINC = 10;    // increment for the division number of the system
-  constexpr double L = 50;     // system size
-  constexpr int NT = 10000;    // divison number of time
-  constexpr double TEND = 10;  // the end of time
+  constexpr double D = 1;          // diffusion coefficient
+  constexpr int NXINI = (1 << 2);  // initial division number of the system
+  constexpr int NXMAX = (1 << 15); // maximum division number of the system
+  constexpr double L = 50;         // system size
+  constexpr int NT = 10000;        // divison number of time
+  constexpr double TEND = 10;      // the end of time
 
   template<class T>
   void solveDiffusionEq(){
@@ -25,7 +24,7 @@ namespace context {
     ofstream ofs(os.str());
     ofs << "### NX \t time[ms]" << endl;
     
-    for(int NX = NXINI; NX <= NXMAX; NX += NXINC){
+    for(int NX = NXINI; NX <= NXMAX; NX <<= 1){
       cout << strategy_name << " NX = " << NX << endl;
 
       des = make_unique<T>(D, NX, L, NT, TEND);
@@ -45,7 +44,9 @@ namespace context {
 }
 
 int main(){
-  // context::solveDiffusionEq<GSL>();
+  context::solveDiffusionEq<GSL>();
+  context::solveDiffusionEq<CrankNicolson_GaussSeidel>();
   context::solveDiffusionEq<CrankNicolson_LAPACK>();
+  context::solveDiffusionEq<FFTW>();
   return 0;
 }
