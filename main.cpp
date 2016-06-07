@@ -19,9 +19,7 @@ namespace context {
     unique_ptr<T> des;
     string strategy_name = typeid(des.get()).name();
 
-    ostringstream os;
-    os << "res/exectime_" << strategy_name << ".txt";
-    ofstream ofs(os.str());
+    ofstream ofs("res/exectime_" + strategy_name + ".txt");
     ofs << "### NX \t time[ms]" << endl;
     
     for(int NX = NXINI; NX <= NXMAX; NX <<= 1){
