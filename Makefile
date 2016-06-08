@@ -43,4 +43,4 @@ run:
 
 # make clean
 clean:
-	$(RM) $(PROGRAM) *.o *.d *.mp4 ./res/*
+	$(RM) $(PROGRAM) *.o *.d *.mp4
