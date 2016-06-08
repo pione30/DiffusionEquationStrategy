@@ -6,7 +6,7 @@ public:
   FFTW(double _D, int _NX, double _L, int _NT, double _TEND);
   ~FFTW() override;
   void timeStepEvolution() override;
-  void output(int ti) const override;
+  void outputPsi(int ti) const override;
 
 private:
 

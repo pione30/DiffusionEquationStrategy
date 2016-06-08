@@ -2,7 +2,7 @@
 
 // public:
 
-void DiffusionEq::output(int ti) const {
+void DiffusionEq::outputPsi(int ti) const {
   ostringstream os;
   os << "res/output" << ti << ".txt";
   ofstream ofs(os.str());
