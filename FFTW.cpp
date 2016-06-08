@@ -30,7 +30,7 @@ void FFTW::timeStepEvolution(){
   cblas_zdscal(NX, 1.0 / NX, psi_out.data(), 1);
 }
 
-void FFTW::output(int ti) const {
+void FFTW::outputPsi(int ti) const {
   ostringstream os;
   os << "res/output" << ti << ".txt";
   ofstream ofs(os.str());

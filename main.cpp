@@ -30,7 +30,7 @@ namespace context {
       auto start = system_clock::now();
       rep(t, NT + 1){
         // cout << "t = " << t << endl;
-        // des->output(t);
+        // des->outputPsi(t);
         if(t == NT) break;
         des->timeStepEvolution();
       }
