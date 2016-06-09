@@ -1,46 +1,50 @@
 # Makefile
 
-PROGRAM = a.out
-SRCS = \
-			main.cpp \
-			GaussSeidel.cpp \
-			DiffusionEq.cpp \
-			GSL.cpp \
-			CrankNicolson_GaussSeidel.cpp \
-			CrankNicolson_LAPACK.cpp \
-			FFTW.cpp
-
 # 定義済みマクロの再定義
 CXX = g++
 CXXFLAGS = -std=c++14 -O2 -Wall
+CPPFLAGS = -I ./include
 LIBS = -lgfortran -lblas -llapack -llapacke -lgsl -lgslcblas -lfftw3 -fopenmp
 
+SRCDIR = ./src
+SRCS = $(wildcard $(SRCDIR)/*.cpp)
+OBJDIR = ./obj
+RESDIR = ./res
+TARGETDIR = ./bin
+PROGRAM = $(addprefix $(TARGETDIR)/, a.out)
+
 # オブジェクトファイルは.cppを.oに置換したもの
-OBJS = $(SRCS:.cpp=.o)
+OBJS = $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.cpp=.o)))
 
 # 依存関係ファイル
-DPNS = $(SRCS:.cpp=.d)
+DPNS = $(OBJS:.o=.d)
+
 
 # プライマリターゲット
 $(PROGRAM): $(OBJS)
+	@mkdir -p $(RESDIR)
+	@mkdir -p $(TARGETDIR)
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
 
 # パターンルール
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< $(LIBS)
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ -c $< $(LIBS)
 
 # .dファイルを読み込む
 -include $(DPNS)
 
 # .cppファイルを解析して、.cppが依存しているヘッダファイルを.dファイルに書き出す
-%.d: %.cpp
-	$(CXX) -M $< > $@.$$$$; \
+$(OBJDIR)/%.d: $(SRCDIR)/%.cpp
+	@mkdir -p $(OBJDIR)
+	$(CXX) $(CPPFLAGS) -M $< > $@.$$$$; \
 		sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
 	$(RM) $@.$$$$
 
+.PHONY: run
 run:
-	./$(PROGRAM)
+	$(PROGRAM)
 
 # make clean
+.PHONY: clean
 clean:
-	$(RM) $(PROGRAM) *.o *.d *.mp4
+	$(RM) $(PROGRAM) $(OBJS) $(DPNS) *.mp4

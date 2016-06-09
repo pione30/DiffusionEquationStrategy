@@ -4,9 +4,6 @@
 *.o
 *.obj
 
-# Dependency Description files
-*.d
-
 # Precompiled Headers
 *.gch
 *.pch
@@ -30,11 +27,13 @@
 *.out
 *.app
 
+# Intermediate files
+*.d
+
 # Output files
 *.txt
 *.png
 *.mp4
-./res/*
 
 # vim swp files
 *.swp
