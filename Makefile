@@ -40,9 +40,11 @@ $(OBJDIR)/%.d: $(SRCDIR)/%.cpp
 		sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
 	$(RM) $@.$$$$
 
+.PHONY: run
 run:
 	$(PROGRAM)
 
 # make clean
+.PHONY: clean
 clean:
 	$(RM) $(PROGRAM) $(OBJS) $(DPNS) *.mp4
