@@ -34,7 +34,7 @@ void FFTW::outputPsi(int ti) const {
   ostringstream os;
   os << "res/output" << ti << ".txt";
   ofstream ofs(os.str());
-  ofs << "### x \t f(x, t)" << endl;
+  ofs << "### x \t psi(x)" << endl;
   rep(i, NX) ofs << i2x(i) << "\t" << psi_out[i].real() << endl;
 }
 

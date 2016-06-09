@@ -2,7 +2,7 @@
 
 // A is a symmetric tridiagonal matrix.
 // b will be overwritten by the result.
-void handmade::GaussSeidel_st(const vd& A, vd &b){
+void handmade::GaussSeidel_st(const vd& A, vd& b){
   double EPS = 1e-10;
   int N = b.size();
 
