@@ -25,7 +25,7 @@ FFTW::~FFTW(){
 }
 
 void FFTW::timeStepEvolution(){
-  rep(i, NX) psi_in[i] *=time_evolver[i];
+  rep(i, NX) psi_in[i] *= time_evolver[i];
   fftw_execute(plan);
   cblas_zdscal(NX, 1.0 / NX, psi_out.data(), 1);
 }
