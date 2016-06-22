@@ -7,7 +7,7 @@ se yl "psi"
 unse key
 se grid
 se yr [0:0.5]
-se term pngcairo enhanced size 640,480 font "Arial,12"
+se term pngcairo enhanced size 640,480 font "Ubuntu, 12"
 do for[i = st : to : offset]{
     pngname = sprintf('./res/output%04d.png', i / offset)
     se output pngname
