@@ -17,6 +17,6 @@ do for[i = st : to : offset]{
     se title gt
     plot input w l
 }
-se term wxt
+se term qt
 se output
 reset
