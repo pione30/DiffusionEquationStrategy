@@ -13,8 +13,8 @@ do for[i = st : to : offset]{
     se output pngname
     
     input = sprintf('./res/output%d.txt', i)
-    gt = sprintf("t = %.2f", i * 0.01)
-    se title gt
+    graphtitle = sprintf("t = %.2f", i * 0.01)
+    se title graphtitle
     plot input w l
 }
 se term qt
