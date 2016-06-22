@@ -1,4 +1,5 @@
-#DiffusionEquationStrategy
+# DiffusionEquationStrategy
+## Usage
 ```
 $ make
 $ make run
