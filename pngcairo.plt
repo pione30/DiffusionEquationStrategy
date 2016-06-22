@@ -3,7 +3,7 @@ st = 0
 to = 1000
 offset = 4
 se xl "x"
-se yl "f"
+se yl "psi"
 unse key
 se grid
 se yr [0:0.5]
